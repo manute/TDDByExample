@@ -6,7 +6,7 @@ import org.junit.Test;
 
 
 public class MoneyTest {
-
+ 
 	@Test
 	public void testMultiplication() {
 		Money five = Money.dollar(5);
