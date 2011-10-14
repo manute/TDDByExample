@@ -1,16 +1,13 @@
 package com.example;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import com.example.Bank;
-import com.example.Expression;
-import com.example.Money;
-
-
 public class MoneyTest {
- 
+
 	@Test
 	public void testMultiplication() {
 		Money five = Money.dollar(5);
@@ -25,22 +22,25 @@ public class MoneyTest {
 		assertFalse(Money.franc(5).equals(Money.dollar(5)));
 	}
 
-	
 	@Test
 	public void testCurrency() {
-		
+
 		assertEquals("USD", Money.dollar(1).currency());
 		assertEquals("CHF", Money.franc(1).currency());
 	}
-	
+
 	@Test
 	public void testReduceMoney() {
-		
-		Bank bank=new Bank();
-		Money result=bank.reduce(Money.dollar(1),  "USD");
+		Bank bank = new Bank();
+		Money result = bank.reduce(Money.dollar(1), "USD");
 		assertEquals(Money.dollar(1), result);
+
+	}
+
+	
+	@Test
+	public void testIdentityByRate(){
+		assertEquals(1, new Bank().rate("USD", "USD"));
 		
 	}
-		
-	
 }

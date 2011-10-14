@@ -1,13 +1,12 @@
 package com.example;
 
-
-  class Money implements Expression {
+class Money implements Expression {
 
 	protected int amount;
 	protected String currency;
 
-	Money times(int multiplier){
-		return  new Money(amount * multiplier,currency);
+	Money times(int multiplier) {
+		return new Money(amount * multiplier, currency);
 	}
 
 	Money(int amount, String currency) {
@@ -15,7 +14,7 @@ package com.example;
 		this.currency = currency;
 	}
 
-    static Money dollar(int amount) {
+	static Money dollar(int amount) {
 		return new Money(amount, "USD");
 	}
 
@@ -26,26 +25,24 @@ package com.example;
 	String currency() {
 		return currency;
 	}
-	
-	Expression  plus(Money addend) {
+
+	Expression plus(Money addend) {
 		return new Sum(this, addend);
 	}
 
-	public Money reduce(String to) {		
-		return this;
+	public Money reduce(Bank bank, String to) {
+		int rate = bank.rate(currency, to);
+		return new Money(amount / rate, to);
 	}
-	
+
 	public boolean equals(Object obj) {
 		Money money = (Money) obj;
 		return amount == money.amount && currency().equals(money.currency());
 	}
-	
+
 	public String toString() {
-		
-		return amount +" "+currency;
+
+		return amount + " " + currency;
 	}
 
-	
-
-	
 }
