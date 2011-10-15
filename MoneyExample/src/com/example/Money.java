@@ -5,7 +5,7 @@ class Money implements Expression {
 	protected int amount;
 	protected String currency;
 
-	Money times(int multiplier) {
+	public Expression times(int multiplier) {
 		return new Money(amount * multiplier, currency);
 	}
 
@@ -26,8 +26,8 @@ class Money implements Expression {
 		return currency;
 	}
 
-	Expression plus(Money addend) {
-		return new Sum(this, addend);
+	public Expression plus(Expression addend) {
+		return new Sum(this, addend); 
 	}
 
 	public Money reduce(Bank bank, String to) {
